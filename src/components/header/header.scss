@@ -1,0 +1,9 @@
+@import './../../sass/variables.scss';
+@import './../../sass//functions.scss';
+.tarefas{
+    padding: 5rem 0;
+    .titulo_tarefas{
+        @include estilo-texto($quicksand, $light-gold, 80, 300);
+        margin-bottom: 3rem;
+    }
+}

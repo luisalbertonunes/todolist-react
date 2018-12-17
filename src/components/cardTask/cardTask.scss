@@ -1,0 +1,39 @@
+@import './../../sass/variables.scss';
+@import './../../sass//functions.scss';
+.card{
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    border:none;
+    @include box-shadow(0px, 2px, 10px, 5px, #dedede);
+    .form-control{
+        border:none;
+        border-radius: 0px;
+        border-bottom: 1px solid #ccc;
+        @include estilo-texto($quicksand, $light-black,22,300);
+        @include input-placeholder{
+            font-style: italic;
+            color: #B6B6B6;   
+        }
+        &:focus{
+            transition: .3s;
+            border-bottom: 2px solid #bbb;
+            box-shadow:none;
+        }
+    }
+    .lista{
+        list-style: none;
+        margin-left: 0;
+        padding-left: 1em;
+        text-indent: 0.5em;
+        li{
+            padding: 1rem 1rem 1rem 0;
+            @include estilo-texto($quicksand, $light-black,22,300);
+            i{
+                color: #DEDEDE;
+                margin-right:10px;
+                cursor: pointer;
+            }
+        }
+    }
+}
