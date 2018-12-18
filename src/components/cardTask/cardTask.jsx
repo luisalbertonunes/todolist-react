@@ -7,8 +7,9 @@ const cardTask = (props) => {
                 <input type="text" className="form-control" placeholder="O que você deseja fazer hoje?" onKeyPress={props.add} />
             </div>
             <ul className="lista">
-            <li><i className="fas fa-check"></i> Tarefa 1 <i className="fas fa-times float-right"></i></li>
-            <li><i className="fas fa-check"></i> Tarefa 2 <i className="fas fa-times float-right"></i></li>
+            {props.tasks.map((t,i) => {
+                return <li  data-id={t.id} data-completed={t.completed} key={i}><i className="fas fa-check" onClick={props.compl}></i> {t.nameTask} <i className="fas fa-times float-right" onClick={props.del}></i></li>
+            })}
             </ul>
         </article>
     );
