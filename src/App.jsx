@@ -5,7 +5,8 @@ import './App.scss';
 
 class App extends Component {
   state = {
-    tarefas:[]
+    tarefas:[],
+    done: false
   }
   cont = 1;
 
@@ -28,15 +29,15 @@ class App extends Component {
   delTaskHandler = (event) => {
     let delTarget = event.target.closest('li').dataset.id;
     console.log(delTarget);
-    this.setState({tarefas: this.state.tarefas.map(m => m).filter(f => f.id !== parseInt(delTarget))}, () =>{
+    this.setState({tarefas: this.state.tarefas.map(m => m).filter(f => f.id !== parseInt(delTarget)), done: false}, () =>{
       console.log(this.state.tarefas);
     });
   }
 
   //completar task
   complTaskHandler = (event) => {
-    event.target.closest('li').dataset.completed = 'true';
-    return 'true';
+    console.log(event.target);
+    this.setState({done: true});
   }
 
   render() {
@@ -49,6 +50,7 @@ class App extends Component {
           key={this.state.tarefas.id}
           del={this.delTaskHandler}
           compl={this.complTaskHandler}
+          done={this.state.done}
         ></CardTask>
       </main>
     );

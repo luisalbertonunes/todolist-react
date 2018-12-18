@@ -8,7 +8,7 @@ const cardTask = (props) => {
             </div>
             <ul className="lista">
             {props.tasks.map((t,i) => {
-                return <li  data-id={t.id} data-completed={t.completed} key={i}><i className="fas fa-check" onClick={props.compl}></i> {t.nameTask} <i className="fas fa-times float-right" onClick={props.del}></i></li>
+                return <li data-id={t.id} key={i} className={props.done === true ? 'active': ''}><i className="fas fa-check" onClick={props.compl}></i> {t.nameTask} <i className="fas fa-times float-right" onClick={props.del}></i></li>
             })}
             </ul>
         </article>
