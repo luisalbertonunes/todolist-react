@@ -6,7 +6,7 @@ import './App.scss';
 class App extends Component {
   state = {
     tarefas:[],
-    done: false
+    todos_marcados: false
   }
   cont = 1;
 
@@ -22,6 +22,7 @@ class App extends Component {
         console.log(this.state.tarefas);
       });
       event.target.value = '';
+
     }
   }
 
@@ -35,9 +36,49 @@ class App extends Component {
   }
 
   //completar task
-  complTaskHandler = (event) => {
+  complTaskHandler = (event, id) => {
+    console.log(event.target, id);
+    this.setState({tarefas:this.state.tarefas.map(m =>
+      { 
+        if(m['id'] === id){
+          if(m['completed'] === true){
+            m.completed = false;
+          }else{
+            m.completed = true;
+          }
+        } 
+        return m;
+      })
+    });
+  }
+
+  //marcar todos completos
+  markAllHandler = (event) => {
+    let arrays = [...this.state.tarefas];
+    let flag = false;
+    if (this.state.todos_marcados) {
+      flag = false;
+    } else {
+      flag = true;
+    }
+    arrays.map((m) => m.completed = flag);
+    this.setState({tarefas: arrays});
+    this.setState({todos_marcados: flag});
+    // this.setState({...this.state.tarefas.map(m =>  {
+    //   console.log(m);
+    //   return m.completed = true;
+    // })}, () => console.log(this.state.tarefas));
+  }
+
+  //remove todos
+  removeAllHandler = (event) => {
     console.log(event.target);
-    this.setState({done: true});
+    this.setState({tarefas: []}, () => console.log(this.state.tarefas));
+    this.setState({todos_marcados: false})
+  }
+
+  checkButtonHandler = () => {
+    return this.state.tarefas.length === 0;
   }
 
   render() {
@@ -45,12 +86,14 @@ class App extends Component {
       <main className="container">
         <Header></Header>
         <CardTask 
+          disabled={this.checkButtonHandler}
           add={this.addTaskHandler} 
           tasks={this.state.tarefas} 
           key={this.state.tarefas.id}
           del={this.delTaskHandler}
           compl={this.complTaskHandler}
-          done={this.state.done}
+          markAll={this.markAllHandler}
+          removeAll={this.removeAllHandler}
         ></CardTask>
       </main>
     );
